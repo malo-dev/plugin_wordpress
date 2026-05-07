@@ -991,42 +991,40 @@ function lpc_render_shortcode() {
     .lpc-page-btn.active{background:var(--clay);border-color:var(--clay);color:var(--ink);font-weight:700}
     .lpc-page-btn[disabled]{opacity:.4;cursor:default;pointer-events:none}
     .lpc-page-dots{color:var(--ink-light);padding:0 4px;line-height:40px}
-    .lpc-modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,20,16,.75);z-index:99999;align-items:flex-start;justify-content:center;padding:60px 16px 20px;overflow-y:auto;backdrop-filter:blur(4px)}
-    .lpc-modal-overlay.open{display:flex}
-    .lpc-modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:clamp(600px,70vw,920px);position:relative;overflow:hidden;box-shadow:0 32px 80px rgba(26,20,16,.3)}
-    .lpc-modal-close{position:absolute;top:16px;right:16px;z-index:10;width:40px;height:40px;background:rgba(26,20,16,.6);border:none;border-radius:50%;cursor:pointer;color:var(--white)}
-    .lpc-modal-gallery{position:relative;height:clamp(240px,35vw,420px);background:var(--ink);overflow:hidden}
-    .lpc-gallery-track{display:flex;height:100%;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-    .lpc-gallery-track img{flex-shrink:0;width:100%;height:100%;object-fit:cover}
-    .lpc-gal-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;background:rgba(26,20,16,.65);border:none;border-radius:50%;color:var(--white);cursor:pointer}
-    .lpc-gal-prev{left:16px}.lpc-gal-next{right:16px}
-    .lpc-gal-counter{position:absolute;bottom:14px;right:16px;background:rgba(26,20,16,.65);color:var(--white);font-size:var(--fs-xs);padding:4px 12px;border-radius:100px}
-    .lpc-modal-body{padding:clamp(20px,3vw,36px) clamp(20px,3vw,36px) clamp(28px,4vw,48px)}
-    .lpc-modal-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px;flex-wrap:wrap}
-    .lpc-modal-loc{font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a07030;margin-bottom:6px}
-    .lpc-modal-title{font-family:var(--font-serif);font-size:var(--fs-2xl);font-weight:700;color:var(--ink);line-height:1.2}
-    .lpc-modal-price{font-family:var(--font-serif);font-size:var(--fs-2xl);font-weight:700;color:#a07030}
-    .lpc-modal-freq{font-size:var(--fs-xs);color:var(--ink-light)}
-    .lpc-modal-specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px;margin-bottom:22px}
-    .lpc-modal-spec-card{background:var(--sand);border-radius:10px;padding:14px 12px;text-align:center}
-    .lpc-modal-spec-card .label{font-size:var(--fs-xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:4px}
-    .lpc-modal-spec-card .value{font-size:var(--fs-sm);font-weight:600;color:var(--ink)}
-    .lpc-modal-section{margin-bottom:22px}
-    .lpc-modal-section h4{font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a07030;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-    .lpc-modal-desc{font-size:var(--fs-sm);line-height:1.75;color:var(--ink-mid);max-height:200px;overflow-y:auto;padding-right:8px}
+    .lpc-detail-view{display:none;max-width:1600px;margin:0 auto;padding:var(--gap-lg) var(--pad-x) clamp(32px,5vw,60px)}
+    .lpc-detail-back{display:inline-flex;align-items:center;gap:8px;color:#a07030;text-decoration:none;font-weight:700;margin-bottom:20px}
+    .lpc-detail-hero{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:18px;margin-bottom:24px}
+    .lpc-detail-main{background:var(--border);border-radius:18px;overflow:hidden;height:clamp(280px,42vw,560px)}
+    .lpc-detail-main img{width:100%;height:100%;object-fit:cover;display:block}
+    .lpc-detail-thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .lpc-detail-thumb{border:none;padding:0;background:var(--border);border-radius:14px;overflow:hidden;cursor:pointer;height:130px}
+    .lpc-detail-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .lpc-detail-top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+    .lpc-detail-loc{font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a07030;margin-bottom:6px}
+    .lpc-detail-title{font-family:var(--font-serif);font-size:var(--fs-2xl);font-weight:700;color:var(--ink);line-height:1.2}
+    .lpc-detail-price{font-family:var(--font-serif);font-size:var(--fs-2xl);font-weight:700;color:#a07030}
+    .lpc-detail-freq{font-size:var(--fs-xs);color:var(--ink-light)}
+    .lpc-detail-specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px;margin-bottom:22px}
+    .lpc-detail-spec-card{background:var(--sand);border-radius:10px;padding:14px 12px;text-align:center}
+    .lpc-detail-spec-card .label{font-size:var(--fs-xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:4px}
+    .lpc-detail-spec-card .value{font-size:var(--fs-sm);font-weight:600;color:var(--ink)}
+    .lpc-detail-section{margin-bottom:22px}
+    .lpc-detail-section h4{font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a07030;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+    .lpc-detail-desc{font-size:var(--fs-sm);line-height:1.75;color:var(--ink-mid)}
     .lpc-features{display:flex;flex-wrap:wrap;gap:8px}
     .lpc-feature-tag{background:var(--sea-light);color:var(--sea);font-size:var(--fs-xs);font-weight:500;padding:5px 12px;border-radius:100px}
-    .lpc-modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .lpc-detail-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
     .lpc-btn-primary,.lpc-btn-secondary{border-radius:10px;padding:14px 20px;font-size:var(--fs-sm);font-family:var(--font-sans);cursor:pointer}
     .lpc-btn-primary{flex:1;min-width:130px;background:var(--clay);color:var(--ink);border:none;font-weight:700}
     .lpc-btn-secondary{background:transparent;color:var(--ink-mid);border:1.5px solid var(--border);font-weight:500}
+    @media (min-width:601px){.lpc-fullwidth-wrapper{position:relative;left:20%}}
     @media (max-width:900px){.lpc-grid{grid-template-columns:repeat(2,1fr);padding:var(--gap-md) var(--pad-x);gap:var(--gap-sm)}}
-    @media (max-width:600px){.lpc-filter-bar{flex-direction:column}.lpc-search-box,.lpc-sel,.lpc-reset-btn{width:100%;min-width:0;flex:1 1 100%}.lpc-grid{grid-template-columns:1fr;padding:12px var(--pad-x);gap:12px}.lpc-modal-overlay{padding:0;align-items:flex-end}.lpc-modal{border-radius:var(--radius-lg) var(--radius-lg) 0 0;max-height:92vh;overflow-y:auto;max-width:100%}.lpc-modal-specs{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:600px){.lpc-filter-bar{flex-direction:column}.lpc-search-box,.lpc-sel,.lpc-reset-btn{width:100%;min-width:0;flex:1 1 100%}.lpc-grid{grid-template-columns:1fr;padding:12px var(--pad-x);gap:12px}.lpc-detail-hero{grid-template-columns:1fr}.lpc-detail-main{height:clamp(220px,55vw,300px)}.lpc-detail-top{flex-direction:column}.lpc-detail-specs{grid-template-columns:repeat(3,1fr)}}
     </style>
 
     <div class="lpc-fullwidth-wrapper">
         <div id="lpc-app">
-            <div class="lpc-filter-wrap">
+            <div class="lpc-filter-wrap" id="lpc-filter-wrap">
                 <div class="lpc-filter-bar">
                     <div class="lpc-search-box">
                         <span>&#128269;</span>
@@ -1050,19 +1048,7 @@ function lpc_render_shortcode() {
 
             <div class="lpc-grid" id="lpc-grid"></div>
             <div class="lpc-pagination" id="lpc-pagination"></div>
-        </div>
-    </div>
-
-    <div class="lpc-modal-overlay" id="lpc-modal-overlay">
-        <div class="lpc-modal">
-            <button class="lpc-modal-close" id="lpc-modal-close" type="button">x</button>
-            <div class="lpc-modal-gallery">
-                <div class="lpc-gallery-track" id="lpc-gallery-track"></div>
-                <button class="lpc-gal-btn lpc-gal-prev" id="lpc-gal-prev" type="button">&#8249;</button>
-                <button class="lpc-gal-btn lpc-gal-next" id="lpc-gal-next" type="button">&#8250;</button>
-                <div class="lpc-gal-counter" id="lpc-gal-counter">1 / 1</div>
-            </div>
-            <div class="lpc-modal-body" id="lpc-modal-body"></div>
+            <div class="lpc-detail-view" id="lpc-detail-view"></div>
         </div>
     </div>
 
@@ -1078,12 +1064,15 @@ function lpc_render_shortcode() {
       var LIMIT = 20;
       var page = 1, totalPages = 1, total = 0, loading = false;
       var filters = { search:'', town:'', type:'', beds:'', priceMin:'', priceMax:'' };
-      var propMap = {}, galIdx = 0, galImgs = [];
+      var propMap = {};
+      var baseUrl = location.href.split('?')[0];
 
       function $(id){ return document.getElementById(id); }
 
+      var $filterWrap = $('lpc-filter-wrap');
       var $grid = $('lpc-grid');
       var $pager = $('lpc-pagination');
+      var $detail = $('lpc-detail-view');
       var $count = $('lpc-count');
       var $search = $('lpc-search');
       var $town = $('lpc-town');
@@ -1092,13 +1081,6 @@ function lpc_render_shortcode() {
       var $pMin = $('lpc-price-min');
       var $pMax = $('lpc-price-max');
       var $reset = $('lpc-reset');
-      var $overlay = $('lpc-modal-overlay');
-      var $mClose = $('lpc-modal-close');
-      var $track = $('lpc-gallery-track');
-      var $mBody = $('lpc-modal-body');
-      var $prev = $('lpc-gal-prev');
-      var $next = $('lpc-gal-next');
-      var $gcnt = $('lpc-gal-counter');
 
       function escapeHtml(str) {
         return String(str || '').replace(/[&<>"']/g, function (m) {
@@ -1140,6 +1122,23 @@ function lpc_render_shortcode() {
         return Array.isArray(p.images) ? p.images.filter(function (img) { return img && img.url; }) : [];
       }
 
+      function propertyUrl(id) {
+        return baseUrl + '?prop=' + encodeURIComponent(id);
+      }
+
+      function setDetailMode(isDetail) {
+        $filterWrap.style.display = isDetail ? 'none' : 'block';
+        $grid.style.display = isDetail ? 'none' : 'grid';
+        $pager.style.display = isDetail ? 'none' : 'flex';
+        $detail.style.display = isDetail ? 'block' : 'none';
+      }
+
+      function indexProperties(data) {
+        (data.properties || []).forEach(function (p) {
+          propMap[p.id] = p;
+        });
+      }
+
       function formatPrice(p) {
         var price = Number(p.price || 0).toLocaleString('en');
         if (p.price_freq === 'month') {
@@ -1176,25 +1175,24 @@ function lpc_render_shortcode() {
           initFilters(PRELOAD_FILTERS);
           return;
         }
-        fetch(FILT).then(function (r) { return r.json(); }).then(initFilters);
+        fetch(FILT).then(function (r) { return r.json(); }).then(initFilters).catch(function () {});
       }
 
       function applyData(data) {
         total = data.total || 0;
         totalPages = data.totalPages || 1;
         propMap = {};
-        (data.properties || []).forEach(function (p) { propMap[p.id] = p; });
+        indexProperties(data);
         renderCards(data.properties || []);
         renderPager();
         $count.textContent = total + ' propert' + (total === 1 ? 'y' : 'ies') + ' found';
       }
 
-      function loadPage(callback) {
+      function loadPage() {
         if (loading) return;
         var isFirst = page === 1 && !filters.search && !filters.town && !filters.type && !filters.beds && !filters.priceMin && !filters.priceMax;
         if (isFirst && PRELOAD_DATA) {
           applyData(PRELOAD_DATA);
-          if (typeof callback === 'function') callback();
           return;
         }
         loading = true;
@@ -1211,7 +1209,6 @@ function lpc_render_shortcode() {
           .then(function (data) {
             applyData(data);
             loading = false;
-            if (typeof callback === 'function') callback();
           })
           .catch(function () {
             $grid.innerHTML = '<div class="lpc-empty"><h3>Connection Error</h3><p>Could not load properties.</p></div>';
@@ -1247,7 +1244,7 @@ function lpc_render_shortcode() {
 
         Array.prototype.forEach.call($grid.querySelectorAll('.lpc-card'), function (card) {
           card.addEventListener('click', function () {
-            openModal(card.getAttribute('data-id'));
+            window.location.href = propertyUrl(card.getAttribute('data-id'));
           });
         });
       }
@@ -1282,22 +1279,41 @@ function lpc_render_shortcode() {
       }
 
       function specCard(label, value) {
-        return '<div class="lpc-modal-spec-card"><div class="label">' + escapeHtml(label) + '</div><div class="value">' + escapeHtml(value) + '</div></div>';
+        return '<div class="lpc-detail-spec-card"><div class="label">' + escapeHtml(label) + '</div><div class="value">' + escapeHtml(value) + '</div></div>';
       }
 
-      function openModal(id) {
-        var p = propMap[id];
-        if (!p) return;
-        history.replaceState(null, '', location.href.split('?')[0] + '?prop=' + encodeURIComponent(id));
-        galImgs = getImages(p);
-        galIdx = 0;
-        $track.innerHTML = galImgs.length ? galImgs.map(function (img) {
-          return '<img src="' + escapeHtml(img.url) + '" alt="property" loading="lazy">';
-        }).join('') : '<img src="https://via.placeholder.com/1200x700?text=No+Image" alt="property">';
-        $track.style.transform = 'translateX(0)';
-        $gcnt.textContent = '1 / ' + (galImgs.length || 1);
+      function bindDetailEvents(p) {
+        var openBtn = document.getElementById('lpc-open-link');
+        var contactBtn = document.getElementById('lpc-contact-link');
+        var shareBtn = document.getElementById('lpc-share-link');
+        var mainImgEl = document.getElementById('lpc-detail-main-img');
+        var urlEn = getUrlEn(p);
 
-        var priceHtml = p.price_freq === 'month' ? '&euro;' + Number(p.price || 0).toLocaleString('en') + '<span class="lpc-modal-freq"> / month</span>' : '&euro;' + Number(p.price || 0).toLocaleString('en');
+        if (openBtn) openBtn.onclick = function () { window.open(urlEn, '_blank'); };
+        if (contactBtn) contactBtn.onclick = function () { window.location.href = 'mailto:' + p.email + '?subject=Property ' + encodeURIComponent(p.ref || p.id); };
+        if (shareBtn) shareBtn.onclick = function () {
+          var shareUrl = propertyUrl(p.id);
+          if (navigator.share) navigator.share({ title: p.ref || p.id, url: shareUrl }).catch(function () {});
+          else if (navigator.clipboard) navigator.clipboard.writeText(shareUrl).then(function () { alert('Link copied!'); });
+          else window.prompt('Copy this link:', shareUrl);
+        };
+
+        Array.prototype.forEach.call($detail.querySelectorAll('.lpc-detail-thumb'), function (thumb) {
+          thumb.addEventListener('click', function () {
+            if (mainImgEl) {
+              mainImgEl.src = thumb.getAttribute('data-img');
+            }
+          });
+        });
+      }
+
+      function renderDetailPage(p) {
+        var imgs = getImages(p);
+        var mainImg = imgs.length ? imgs[0].url : 'https://via.placeholder.com/1200x700?text=No+Image';
+        var thumbs = imgs.slice(0, 4).map(function (img) {
+          return '<button class="lpc-detail-thumb" type="button" data-img="' + escapeHtml(img.url) + '"><img src="' + escapeHtml(img.url) + '" alt="property" loading="lazy"></button>';
+        }).join('');
+        var priceHtml = p.price_freq === 'month' ? '&euro;' + Number(p.price || 0).toLocaleString('en') + '<span class="lpc-detail-freq"> / month</span>' : '&euro;' + Number(p.price || 0).toLocaleString('en');
         var specs = '';
         if (p.beds) specs += specCard('Beds', p.beds);
         if (p.baths) specs += specCard('Baths', p.baths);
@@ -1307,61 +1323,46 @@ function lpc_render_shortcode() {
         if (p.new_build) specs += specCard('Build', 'New');
         if (p.energy_rating && p.energy_rating.consumption) specs += specCard('Energy', p.energy_rating.consumption);
 
-        var urlEn = getUrlEn(p);
         var feats = Array.isArray(p.features) ? p.features : [];
         var actions = '';
-        if (urlEn) actions += '<button class="lpc-btn-primary" type="button" id="lpc-open-link">Full Listing</button>';
+        if (getUrlEn(p)) actions += '<button class="lpc-btn-primary" type="button" id="lpc-open-link">Full Listing</button>';
         if (p.email) actions += '<button class="lpc-btn-secondary" type="button" id="lpc-contact-link">Contact</button>';
         actions += '<button class="lpc-btn-secondary" type="button" id="lpc-share-link">Share</button>';
 
-        $mBody.innerHTML = '<div class="lpc-modal-top"><div><div class="lpc-modal-loc">' + escapeHtml([p.town,p.province,p.country].filter(Boolean).join(' - ')) + '</div><div class="lpc-modal-title">' + escapeHtml((p.type || 'Property') + (p.ref ? ' - ' + p.ref : '')) + '</div></div><div class="lpc-modal-price">' + priceHtml + '</div></div>'
-          + '<div class="lpc-modal-specs">' + specs + '</div>'
-          + (feats.length ? '<div class="lpc-modal-section"><h4>Features & Amenities</h4><div class="lpc-features">' + feats.map(function (f) { return '<span class="lpc-feature-tag">' + escapeHtml(f) + '</span>'; }).join('') + '</div></div>' : '')
-          + '<div class="lpc-modal-section"><h4>Description</h4><div class="lpc-modal-desc">' + getDesc(p) + '</div></div>'
-          + '<div class="lpc-modal-actions">' + actions + '</div>';
+        $detail.innerHTML = '<a class="lpc-detail-back" href="' + escapeHtml(baseUrl) + '">&larr; Back to properties</a>'
+          + '<div class="lpc-detail-hero"><div class="lpc-detail-main"><img id="lpc-detail-main-img" src="' + escapeHtml(mainImg) + '" alt="property" loading="lazy"></div><div class="lpc-detail-thumbs">' + thumbs + '</div></div>'
+          + '<div class="lpc-detail-top"><div><div class="lpc-detail-loc">' + escapeHtml([p.town,p.province,p.country].filter(Boolean).join(' - ')) + '</div><div class="lpc-detail-title">' + escapeHtml((p.type || 'Property') + (p.ref ? ' - ' + p.ref : '')) + '</div></div><div class="lpc-detail-price">' + priceHtml + '</div></div>'
+          + '<div class="lpc-detail-specs">' + specs + '</div>'
+          + (feats.length ? '<div class="lpc-detail-section"><h4>Features & Amenities</h4><div class="lpc-features">' + feats.map(function (f) { return '<span class="lpc-feature-tag">' + escapeHtml(f) + '</span>'; }).join('') + '</div></div>' : '')
+          + '<div class="lpc-detail-section"><h4>Description</h4><div class="lpc-detail-desc">' + getDesc(p) + '</div></div>'
+          + '<div class="lpc-detail-actions">' + actions + '</div>';
 
-        var openBtn = document.getElementById('lpc-open-link');
-        var contactBtn = document.getElementById('lpc-contact-link');
-        var shareBtn = document.getElementById('lpc-share-link');
-
-        if (openBtn) openBtn.onclick = function () { window.open(urlEn, '_blank'); };
-        if (contactBtn) contactBtn.onclick = function () { window.location.href = 'mailto:' + p.email + '?subject=Property ' + encodeURIComponent(p.ref || p.id); };
-        if (shareBtn) shareBtn.onclick = function () {
-          var shareUrl = location.href.split('?')[0] + '?prop=' + encodeURIComponent(p.id);
-          if (navigator.share) navigator.share({ title: p.ref || p.id, url: shareUrl }).catch(function () {});
-          else if (navigator.clipboard) navigator.clipboard.writeText(shareUrl).then(function () { alert('Link copied!'); });
-          else window.prompt('Copy this link:', shareUrl);
-        };
-
-        $overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        setDetailMode(true);
+        bindDetailEvents(p);
       }
 
-      function closeModal() {
-        $overlay.classList.remove('open');
-        document.body.style.overflow = '';
-        history.replaceState(null, '', location.href.split('?')[0]);
+      function loadPropertyAndRender(id) {
+        if (propMap[id]) {
+          renderDetailPage(propMap[id]);
+          return;
+        }
+
+        fetch(API_ONE + '/' + encodeURIComponent(id))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.property && data.property.id) {
+              propMap[data.property.id] = data.property;
+              renderDetailPage(data.property);
+            } else {
+              setDetailMode(true);
+              $detail.innerHTML = '<div class="lpc-empty"><h3>Property not found</h3><p>This property does not exist.</p></div>';
+            }
+          })
+          .catch(function () {
+            setDetailMode(true);
+            $detail.innerHTML = '<div class="lpc-empty"><h3>Connection Error</h3><p>Could not load property details.</p></div>';
+          });
       }
-
-      $prev.onclick = function () {
-        if (galIdx > 0) {
-          galIdx--;
-          $track.style.transform = 'translateX(-' + (galIdx * 100) + '%)';
-          $gcnt.textContent = (galIdx + 1) + ' / ' + (galImgs.length || 1);
-        }
-      };
-
-      $next.onclick = function () {
-        if (galIdx < galImgs.length - 1) {
-          galIdx++;
-          $track.style.transform = 'translateX(-' + (galIdx * 100) + '%)';
-          $gcnt.textContent = (galIdx + 1) + ' / ' + galImgs.length;
-        }
-      };
-
-      $mClose.onclick = closeModal;
-      $overlay.onclick = function (e) { if (e.target === $overlay) closeModal(); };
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 
       function go() {
         page = 1;
@@ -1383,33 +1384,23 @@ function lpc_render_shortcode() {
         go();
       };
 
-      loadFilters();
-
       var urlParams = new URLSearchParams(window.location.search);
       var propFromUrl = urlParams.get('prop');
-      if (PRELOAD_DATA) {
-        applyData(PRELOAD_DATA);
-        if (propFromUrl) {
-          if (propMap[propFromUrl]) {
-            openModal(propFromUrl);
-          } else {
-            fetch(API_ONE + '/' + encodeURIComponent(propFromUrl))
-              .then(function (r) { return r.json(); })
-              .then(function (data) { if (data.property && data.property.id) { propMap[data.property.id] = data.property; openModal(data.property.id); } });
-          }
+
+      if (propFromUrl) {
+        if (PRELOAD_DATA) {
+          indexProperties(PRELOAD_DATA);
         }
+        loadPropertyAndRender(propFromUrl);
       } else {
-        showSkeletons();
-        loadPage(function () {
-          if (!propFromUrl) return;
-          if (propMap[propFromUrl]) {
-            openModal(propFromUrl);
-          } else {
-            fetch(API_ONE + '/' + encodeURIComponent(propFromUrl))
-              .then(function (r) { return r.json(); })
-              .then(function (data) { if (data.property && data.property.id) { propMap[data.property.id] = data.property; openModal(data.property.id); } });
-          }
-        });
+        loadFilters();
+        setDetailMode(false);
+        if (PRELOAD_DATA) {
+          applyData(PRELOAD_DATA);
+        } else {
+          showSkeletons();
+          loadPage();
+        }
       }
     })();
     </script>

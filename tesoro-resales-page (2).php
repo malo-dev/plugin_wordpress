@@ -100,21 +100,7 @@ function tesoro_resales_shortcode() {
   <span id="tsr-i-inop"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a7a6a" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></span>
 </div>
 
-<!-- Modal -->
-<div class="tsr-modal-overlay" id="tsr-modal-overlay">
-  <div class="tsr-modal">
-    <button class="tsr-modal-close" id="tsr-modal-close">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="tsr-modal-gallery">
-      <div class="tsr-gallery-track" id="tsr-gallery-track"></div>
-      <button class="tsr-gal-btn tsr-gal-prev" id="tsr-gal-prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg></button>
-      <button class="tsr-gal-btn tsr-gal-next" id="tsr-gal-next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></button>
-      <div class="tsr-gal-counter" id="tsr-gal-counter">1 / 1</div>
-    </div>
-    <div class="tsr-modal-body" id="tsr-modal-body"></div>
-  </div>
-</div>
+<div id="tsr-detail-page" style="display:none"></div>
 
 <style>
 /* ═══════════════════════════════════════════════════
@@ -259,8 +245,7 @@ function tesoro_resales_shortcode() {
 ═══════════════════════════════════════════════════ */
 .tsr-grid {
   display: grid;
-  /* Colonnes auto-responsives : min 280px, max 1fr */
-  grid-template-columns: repeat(auto-fill, minmax(clamp(260px, 28vw, 340px), 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--gap-md);
   padding: var(--gap-lg) var(--pad-x);
   width: 100%;
@@ -468,70 +453,8 @@ function tesoro_resales_shortcode() {
 .tsr-page-dots { color: var(--ink-light); padding: 0 4px; line-height: 40px; }
 
 /* ═══════════════════════════════════════════════════
-   MODAL
+   GALLERY NAV (partagé)
 ═══════════════════════════════════════════════════ */
-.tsr-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(26,20,16,.75);
-  z-index: 99999;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 60px 16px 20px;
-  overflow-y: auto;
-  backdrop-filter: blur(4px);
-}
-.tsr-modal-overlay.open { display: flex; }
-
-.tsr-modal {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: clamp(600px, 70vw, 920px);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 32px 80px rgba(26,20,16,.3);
-  animation: tsr-modal-in .35s cubic-bezier(.4,0,.2,1);
-}
-@keyframes tsr-modal-in {
-  from { opacity:0; transform:translateY(30px) scale(.97); }
-  to   { opacity:1; transform:none; }
-}
-
-.tsr-modal-close {
-  position: absolute;
-  top: 16px; right: 16px;
-  z-index: 10;
-  width: 40px; height: 40px;
-  background: rgba(26,20,16,.6);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background var(--tr);
-}
-.tsr-modal-close:hover { background: var(--clay); color: var(--ink); }
-
-.tsr-modal-gallery {
-  position: relative;
-  height: clamp(240px, 35vw, 420px);
-  background: var(--ink);
-  overflow: hidden;
-}
-.tsr-gallery-track {
-  display: flex;
-  height: 100%;
-  transition: transform .4s cubic-bezier(.4,0,.2,1);
-}
-.tsr-gallery-track img {
-  flex-shrink: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
 .tsr-gal-btn {
   position: absolute;
   top: 50%; transform: translateY(-50%);
@@ -557,86 +480,9 @@ function tesoro_resales_shortcode() {
   border-radius: 100px;
 }
 
-.tsr-modal-body { padding: clamp(20px,3vw,36px) clamp(20px,3vw,36px) clamp(28px,4vw,48px); }
-
-.tsr-modal-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-.tsr-modal-loc {
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: #a07030;
-  margin-bottom: 6px;
-}
-.tsr-modal-title {
-  font-family: var(--font-serif);
-  font-size: var(--fs-2xl);
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.2;
-}
-.tsr-modal-price-box { text-align: right; flex-shrink: 0; }
-.tsr-modal-price {
-  font-family: var(--font-serif);
-  font-size: var(--fs-2xl);
-  font-weight: 700;
-  color: #a07030;
-}
-.tsr-modal-freq { font-size: var(--fs-xs); color: var(--ink-light); }
-
-.tsr-modal-specs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 10px;
-  margin-bottom: 22px;
-}
-.tsr-modal-spec-card {
-  background: var(--sand);
-  border-radius: 10px;
-  padding: 14px 12px;
-  text-align: center;
-}
-.tsr-modal-spec-card .icon { font-size: 22px; margin-bottom: 6px; }
-.tsr-modal-spec-card .label {
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  margin-bottom: 4px;
-}
-.tsr-modal-spec-card .value { font-size: var(--fs-sm); font-weight: 600; color: var(--ink); }
-
-.tsr-modal-section { margin-bottom: 22px; }
-.tsr-modal-section h4 {
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: #a07030;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.tsr-modal-desc {
-  font-size: var(--fs-sm);
-  line-height: 1.75;
-  color: var(--ink-mid);
-  max-height: 200px;
-  overflow-y: auto;
-  padding-right: 8px;
-}
-.tsr-modal-desc::-webkit-scrollbar { width: 4px; }
-.tsr-modal-desc::-webkit-scrollbar-track { background: var(--sand); }
-.tsr-modal-desc::-webkit-scrollbar-thumb { background: var(--clay); border-radius: 4px; }
-
+/* ═══════════════════════════════════════════════════
+   FEATURES & BOUTONS PARTAGÉS
+═══════════════════════════════════════════════════ */
 .tsr-features { display: flex; flex-wrap: wrap; gap: 8px; }
 .tsr-feature-tag {
   background: var(--sea-light);
@@ -647,12 +493,6 @@ function tesoro_resales_shortcode() {
   border-radius: 100px;
 }
 
-.tsr-modal-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
 .tsr-btn-primary {
   flex: 1;
   min-width: 130px;
@@ -691,10 +531,112 @@ function tesoro_resales_shortcode() {
 .tsr-btn-secondary:hover { border-color: var(--clay); color: #a07030; }
 
 /* ═══════════════════════════════════════════════════
+   SPEC CARD (partagé)
+═══════════════════════════════════════════════════ */
+.tsr-spec-card {
+  background: var(--sand);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.tsr-spec-card .icon { font-size: 22px; margin-bottom: 6px; }
+.tsr-spec-card .label {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+.tsr-spec-card .value { font-size: var(--fs-sm); font-weight: 600; color: var(--ink); }
+
+/* ═══════════════════════════════════════════════════
+   PAGE DÉTAIL PROPRIÉTÉ
+═══════════════════════════════════════════════════ */
+#tsr-detail-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--gap-sm) var(--pad-x) var(--gap-lg);
+}
+.tsr-detail-back { padding: var(--gap-sm) 0 var(--gap-md); }
+.tsr-detail-back-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 10px 18px;
+  font-family: var(--font-sans); font-size: var(--fs-sm);
+  color: var(--ink-mid); cursor: pointer; transition: all var(--tr);
+}
+.tsr-detail-back-btn:hover { border-color: var(--clay); color: #a07030; }
+
+.tsr-detail-gallery {
+  position: relative;
+  height: clamp(260px, 42vw, 520px);
+  border-radius: var(--radius-lg);
+  overflow: hidden; background: var(--ink);
+  margin-bottom: var(--gap-lg);
+}
+.tsr-detail-track {
+  display: flex; height: 100%;
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+.tsr-detail-track img {
+  flex-shrink: 0; width: 100%; height: 100%; object-fit: cover;
+}
+
+.tsr-detail-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: var(--gap-md);
+  margin-bottom: var(--gap-md); flex-wrap: wrap;
+  padding-bottom: var(--gap-md); border-bottom: 1px solid var(--border);
+}
+.tsr-detail-left { flex: 1 1 300px; }
+.tsr-detail-right { text-align: right; flex-shrink: 0; }
+
+.tsr-detail-loc {
+  font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: #a07030; margin-bottom: 8px;
+}
+.tsr-detail-title {
+  font-family: var(--font-serif); font-size: var(--fs-2xl);
+  font-weight: 700; color: var(--ink); line-height: 1.2;
+}
+.tsr-detail-price {
+  font-family: var(--font-serif); font-size: var(--fs-2xl);
+  font-weight: 700; color: #a07030;
+}
+.tsr-detail-freq { font-size: var(--fs-sm); color: var(--ink-light); margin-top: 4px; }
+
+.tsr-detail-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px; margin-bottom: var(--gap-md);
+}
+.tsr-detail-section { margin-bottom: var(--gap-md); }
+.tsr-detail-section h4 {
+  font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: #a07030; margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.tsr-detail-desc {
+  font-size: var(--fs-base); line-height: 1.8; color: var(--ink-mid);
+}
+.tsr-detail-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-top: var(--gap-md);
+  padding-top: var(--gap-md); border-top: 1px solid var(--border);
+}
+
+/* ═══════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════ */
 
-/* Tablette : 2 colonnes fixes si auto-fill ne suffit pas */
+@media (max-width: 1200px) {
+  .tsr-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .tsr-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -703,7 +645,13 @@ function tesoro_resales_shortcode() {
   }
 }
 
-/* Mobile */
+@media (min-width: 601px) {
+  .tsr-fullwidth-wrapper {
+    position: relative;
+    left: 20%;
+  }
+}
+
 @media (max-width: 600px) {
   .tsr-filter-bar { flex-direction: column; }
   .tsr-search-box,
@@ -716,23 +664,12 @@ function tesoro_resales_shortcode() {
     gap: 12px;
   }
 
-  .tsr-modal-gallery { height: clamp(200px, 55vw, 280px); }
-  .tsr-modal-overlay {
-    padding: 0;
-    align-items: flex-end;
-  }
-  .tsr-modal {
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    max-height: 92vh;
-    overflow-y: auto;
-    max-width: 100%;
-  }
-  .tsr-modal-specs {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .tsr-detail-gallery { height: clamp(200px, 55vw, 300px); border-radius: 0; }
+  .tsr-detail-header { flex-direction: column; }
+  .tsr-detail-right { text-align: left; }
+  .tsr-detail-specs { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Très grands écrans : confort de lecture */
 @media (min-width: 1600px) {
   .tsr-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -772,15 +709,6 @@ function tesoro_resales_shortcode() {
   var $pMin    = $('tsr-price-min');
   var $pMax    = $('tsr-price-max');
   var $reset   = $('tsr-reset');
-  var $overlay = $('tsr-modal-overlay');
-  var $mClose  = $('tsr-modal-close');
-  var $track   = $('tsr-gallery-track');
-  var $mBody   = $('tsr-modal-body');
-  var $prev    = $('tsr-gal-prev');
-  var $next    = $('tsr-gal-next');
-  var $gcnt    = $('tsr-gal-counter');
-
-  var galIdx = 0, galImgs = [];
 
   function svg(id){ return document.getElementById(id).innerHTML; }
   var ICO = {
@@ -949,7 +877,7 @@ function tesoro_resales_shortcode() {
       var price = p.price_freq==='month'
         ? '&euro;'+Number(p.price).toLocaleString('en')+' <small>/mo</small>'
         : '&euro;'+Number(p.price).toLocaleString('en');
-      h += '<div class="tsr-card" style="animation-delay:'+(i*.05)+'s" onclick="tsrModal(\''+p.id+'\''+')">'
+      h += '<div class="tsr-card" style="animation-delay:'+(i*.05)+'s" onclick="tsrGoTo(\''+p.id+'\''+')">'
         + '<div class="tsr-card-img"><img src="'+img+'" alt="'+(p.town||'')+'" loading="lazy">'
         + badge
         + (npic>1?'<div class="tsr-card-photo-count">'+ICO.cam+' '+npic+'</div>':'')
@@ -999,66 +927,71 @@ function tesoro_resales_shortcode() {
     loadPage();
   };
 
-  window.tsrModal=function(id){
-    var p=propMap[id]; if(!p)return;
-    history.replaceState(null,'',location.href.split('?')[0]+'?prop='+id);
-    var imgs=getImages(p); galImgs=imgs; galIdx=0;
-    var gi=''; imgs.forEach(function(img){ gi+='<img src="'+img.url+'" alt="property" loading="lazy">'; });
-    $track.innerHTML=gi; $track.style.transform='translateX(0)';
-    $gcnt.textContent='1 / '+(imgs.length||1);
-    var desc=getDesc(p); var feats=p.features||[];
+  window.tsrGoTo=function(id){
+    window.location.href=location.href.split('?')[0]+'?prop='+id;
+  };
+
+  function renderDetail(p){
+    document.getElementById('tsr-app').style.display='none';
+    var $det=document.getElementById('tsr-detail-page');
+    $det.style.display='block';
+    var imgs=getImages(p); var galI=0;
+    var SL='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>';
+    var galHtml='';
+    if(imgs.length){
+      var trks=imgs.map(function(img){return'<img src="'+img.url+'" alt="property" loading="lazy">';}).join('');
+      galHtml='<div class="tsr-detail-gallery"><div class="tsr-detail-track" id="tsr-dtrack">'+trks+'</div>'
+        +(imgs.length>1
+          ?'<button class="tsr-gal-btn tsr-gal-prev" id="tsr-dprev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg></button>'
+          +'<button class="tsr-gal-btn tsr-gal-next" id="tsr-dnext"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></button>'
+          +'<div class="tsr-gal-counter" id="tsr-dcnt">1 / '+imgs.length+'</div>':'')
+        +'</div>';
+    }
     var priceHtml=p.price_freq==='month'
-      ?'&euro;'+Number(p.price).toLocaleString('en')+'<span class="tsr-modal-freq"> / month</span>'
+      ?'&euro;'+Number(p.price).toLocaleString('en')+'<div class="tsr-detail-freq">/ month</div>'
       :'&euro;'+Number(p.price).toLocaleString('en');
     var specs='';
     if(p.beds)  specs+=specCard(ICO.ibed,'Beds',p.beds);
     if(p.baths) specs+=specCard(ICO.ibth,'Baths',p.baths);
     if(p.surface_area&&p.surface_area.built) specs+=specCard(ICO.iarea,'Built',p.surface_area.built+' m&sup2;');
-    if(p.surface_area&&p.surface_area.plot)  specs+=specCard(ICO.iplot,'Plot', p.surface_area.plot +' m&sup2;');
+    if(p.surface_area&&p.surface_area.plot)  specs+=specCard(ICO.iplot,'Plot',p.surface_area.plot+' m&sup2;');
     specs+=specCard(p.pool?ICO.ipool:ICO.inop,'Pool',p.pool?'Yes':'No');
     if(p.new_build) specs+=specCard(ICO.inew,'Build','New');
     if(p.energy_rating&&p.energy_rating.consumption&&p.energy_rating.consumption!=='X')
       specs+=specCard(ICO.ienrg,'Energy',p.energy_rating.consumption);
-    var urlEn=getUrlEn(p); var actions='';
+    var desc=getDesc(p); var feats=p.features||[]; var urlEn=getUrlEn(p); var actions='';
     if(urlEn) actions+='<button class="tsr-btn-primary" onclick="window.open(\''+urlEn+'\',\'_blank\')">'+ICO.ext+' Full Listing</button>';
     actions+='<button class="tsr-btn-secondary" onclick="tsrShare(\''+p.id+'\',\''+esc(p.town)+' '+esc(p.type)+'\')">'+ICO.shr+' Share</button>';
     if(p.email) actions+='<button class="tsr-btn-secondary" onclick="location.href=\'mailto:'+p.email+'?subject=Property '+esc(p.ref)+'\'">'+ICO.mail+' Contact</button>';
-    $mBody.innerHTML=
-      '<div class="tsr-modal-top"><div>'
-      +'<div class="tsr-modal-loc">'+[p.town,p.province,p.country].filter(Boolean).join(' &middot; ')+'</div>'
-      +'<div class="tsr-modal-title">'+(p.type||'Property')+(p.ref?' &middot; '+p.ref:'')+'</div>'
-      +'</div><div class="tsr-modal-price-box"><div class="tsr-modal-price">'+priceHtml+'</div></div></div>'
-      +'<div class="tsr-modal-specs">'+specs+'</div>'
-      +(feats.length?'<div class="tsr-modal-section"><h4>Features &amp; Amenities</h4><div class="tsr-features">'
-        +feats.map(function(f){return'<span class="tsr-feature-tag">'+f+'</span>';}).join('')
-        +'</div></div>':'')
-      +'<div class="tsr-modal-section"><h4>Description</h4><div class="tsr-modal-desc">'+desc+'</div></div>'
-      +'<div class="tsr-modal-actions">'+actions+'</div>';
-    $overlay.classList.add('open');
-    document.body.style.overflow='hidden';
-  };
+    $det.innerHTML='<div class="tsr-detail-back"><button class="tsr-detail-back-btn" onclick="history.back()">'+SL+' Back to listings</button></div>'
+      +galHtml
+      +'<div class="tsr-detail-header"><div class="tsr-detail-left">'
+      +'<div class="tsr-detail-loc">'+[p.town,p.province,p.country].filter(Boolean).join(' &middot; ')+'</div>'
+      +'<div class="tsr-detail-title">'+(p.type||'Property')+(p.ref?' &middot; '+p.ref:'')+'</div>'
+      +'</div><div class="tsr-detail-right"><div class="tsr-detail-price">'+priceHtml+'</div></div></div>'
+      +'<div class="tsr-detail-specs">'+specs+'</div>'
+      +(feats.length?'<div class="tsr-detail-section"><h4>Features &amp; Amenities</h4><div class="tsr-features">'
+        +feats.map(function(f){return'<span class="tsr-feature-tag">'+f+'</span>';}).join('')+'</div></div>':'')
+      +'<div class="tsr-detail-section"><h4>Description</h4><div class="tsr-detail-desc">'+desc+'</div></div>'
+      +'<div class="tsr-detail-actions">'+actions+'</div>';
+    if(imgs.length>1){
+      var $dt=document.getElementById('tsr-dtrack');
+      var $dc=document.getElementById('tsr-dcnt');
+      document.getElementById('tsr-dprev').onclick=function(){
+        if(galI>0){galI--;$dt.style.transform='translateX(-'+(galI*100)+'%)';$dc.textContent=(galI+1)+' / '+imgs.length;}
+      };
+      document.getElementById('tsr-dnext').onclick=function(){
+        if(galI<imgs.length-1){galI++;$dt.style.transform='translateX(-'+(galI*100)+'%)';$dc.textContent=(galI+1)+' / '+imgs.length;}
+      };
+    }
+    window.scrollTo(0,0);
+  }
 
   function specCard(icon,label,value){
-    return'<div class="tsr-modal-spec-card"><div class="icon">'+icon+'</div>'
+    return'<div class="tsr-spec-card"><div class="icon">'+icon+'</div>'
       +'<div class="label">'+label+'</div><div class="value">'+value+'</div></div>';
   }
   function esc(s){return s?String(s).replace(/'/g,'').replace(/"/g,''):''; }
-
-  $prev.onclick=function(){
-    if(galIdx>0){galIdx--;$track.style.transform='translateX(-'+(galIdx*100)+'%)';$gcnt.textContent=(galIdx+1)+' / '+galImgs.length;}
-  };
-  $next.onclick=function(){
-    if(galIdx<galImgs.length-1){galIdx++;$track.style.transform='translateX(-'+(galIdx*100)+'%)';$gcnt.textContent=(galIdx+1)+' / '+galImgs.length;}
-  };
-
-  function closeModal(){
-    $overlay.classList.remove('open');
-    document.body.style.overflow='';
-    history.replaceState(null,'',location.href.split('?')[0]);
-  }
-  $mClose.onclick=closeModal;
-  $overlay.onclick=function(e){if(e.target===$overlay)closeModal();};
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 
   window.tsrShare=function(id,name){
     var url=location.href.split('?')[0]+'?prop='+id;
@@ -1088,10 +1021,10 @@ function tesoro_resales_shortcode() {
   if(PRELOAD_DATA){
     applyData(PRELOAD_DATA);
     if(propFromUrl){
-      if(propMap[propFromUrl]){tsrModal(propFromUrl);}
+      if(propMap[propFromUrl]){renderDetail(propMap[propFromUrl]);}
       else{
         fetch(API+'/'+propFromUrl).then(function(r){return r.json();})
-          .then(function(data){var prop=data.property||data;if(prop&&prop.id){propMap[prop.id]=prop;tsrModal(prop.id);}})
+          .then(function(data){var prop=data.property||data;if(prop&&prop.id){propMap[prop.id]=prop;renderDetail(prop);}})
           .catch(function(){});
       }
     }
@@ -1099,9 +1032,9 @@ function tesoro_resales_shortcode() {
     showSkeletons();
     loadPage(function(){
       if(!propFromUrl)return;
-      if(propMap[propFromUrl]){tsrModal(propFromUrl);return;}
+      if(propMap[propFromUrl]){renderDetail(propMap[propFromUrl]);return;}
       fetch(API+'/'+propFromUrl).then(function(r){return r.json();})
-        .then(function(data){var prop=data.property||data;if(prop&&prop.id){propMap[prop.id]=prop;tsrModal(prop.id);}})
+        .then(function(data){var prop=data.property||data;if(prop&&prop.id){propMap[prop.id]=prop;renderDetail(prop);}})
         .catch(function(){});
     });
   }
